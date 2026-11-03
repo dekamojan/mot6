@@ -1,0 +1,168 @@
+{
+  "style": "explainer",
+  "scenes": [
+    {
+      "title": "Eh, kamu tau nggak sih?",
+      "start": 0,
+      "small": 0,
+      "stage": [
+        {
+          "type": "image",
+          "src": "img/img01.png",
+          "h": 960
+        }
+      ],
+      "bg": "night",
+      "prop": "bulb"
+    },
+    {
+      "title": "*Kebanyakan* *orang* tuh salah di satu hal ini pas mau jualan,",
+      "start": 1.6,
+      "small": 1,
+      "stage": [
+        {
+          "type": "image",
+          "src": "img/img02.png",
+          "h": 960
+        }
+      ],
+      "bg": "room"
+    },
+    {
+      "title": "*yaitu* *nunggu* berani dulu baru mau mulai.",
+      "start": 5.3,
+      "small": 1,
+      "stage": [
+        {
+          "type": "image",
+          "src": "img/img03.png",
+          "h": 960
+        }
+      ],
+      "bg": "stage",
+      "prop": "rocket"
+    },
+    {
+      "title": "*Padahal* *kuncinya* itu jualan aja dulu ke temen-temen deket yang",
+      "start": 7.9,
+      "small": 1,
+      "stage": [
+        {
+          "type": "image",
+          "src": "img/img04.png",
+          "h": 960
+        }
+      ],
+      "bg": "dusk"
+    },
+    {
+      "title": "*suportif* biar *mental* kamu makin terlatih. Terus,",
+      "start": 11.7,
+      "small": 1,
+      "pose": "thumbs",
+      "mascot": "left",
+      "stage": [
+        {
+          "type": "callout",
+          "title": "suportif biar mental",
+          "sub": "kamu makin terlatih. Terus,"
+        }
+      ],
+      "bg": "day",
+      "prop": "laptop"
+    },
+    {
+      "title": "coba deh lebih *fokus* *kasih* solusi daripada cuma mikirin untung doang.",
+      "start": 14.8,
+      "small": 1,
+      "stage": [
+        {
+          "type": "image",
+          "src": "img/img05.png",
+          "h": 960
+        }
+      ],
+      "bg": "office",
+      "pops": [
+        {
+          "word": "untung",
+          "glyph": "💰",
+          "anim": "drop",
+          "object": "a bag of money with gold coins",
+          "img": "pics/pop01.png"
+        }
+      ]
+    },
+    {
+      "title": "Nah, *posting* aja *tanpa* perlu pusing liatin jumlah likes-nya ya.",
+      "start": 19.2,
+      "small": 1,
+      "stage": [
+        {
+          "type": "image",
+          "src": "img/img06.png",
+          "h": 960
+        }
+      ],
+      "bg": "dawn",
+      "prop": "orb"
+    },
+    {
+      "title": "*Nanti* *rasa* takut kamu itu bakal berubah kok jadi rasa bangga.",
+      "start": 23.3,
+      "small": 1,
+      "stage": [
+        {
+          "type": "image",
+          "src": "img/img07.png",
+          "h": 960
+        }
+      ],
+      "bg": "night",
+      "pops": [
+        {
+          "word": "takut",
+          "glyph": "😨",
+          "anim": "pop",
+          "object": "a scared worried face with wide eyes",
+          "img": "pics/pop02.png"
+        }
+      ]
+    },
+    {
+      "title": "*Jangan* *lupa* simpan video ini ya!",
+      "start": 27.2,
+      "small": 1,
+      "pose": "cheer",
+      "mascot": "left",
+      "stage": [
+        {
+          "type": "callout",
+          "title": "Jangan lupa simpan video",
+          "sub": "ini ya!"
+        }
+      ],
+      "bg": "room",
+      "prop": "shadow"
+    }
+  ],
+  "header": false,
+  "accent": "#FFD700",
+  "char": "boss",
+  "charColor": "#222222",
+  "showCta": false,
+  "charStyle": "stick",
+  "transitions": [
+    "fade",
+    "slide-left",
+    "zoom"
+  ],
+  "transitionsMode": "random",
+  "bgEvery": 1,
+  "theme": "classic",
+  "audio": {
+    "music": true,
+    "sfx": true,
+    "blockSfx": true
+  }
+}
