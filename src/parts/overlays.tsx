@@ -16,8 +16,7 @@ import type { Cx, Pop } from "./types";
 export const popTime = (p: Pop, cx: Cx, i: number): number => {
   if (typeof p.at === "number") return cx.base + Math.max(0, p.at);
   const k = p.word ? norm(p.word) : "";
-  // hanya kata yang diucapkan di/ setelah awal adegan ini (bukan kemunculan yang sama di adegan sebelumnya)
-  const hit = k ? cx.ws.find((w) => w.a >= cx.base - 0.1 && norm(w.w).startsWith(k)) : undefined;
+  const hit = k ? cx.ws.find((w) => norm(w.w).startsWith(k)) : undefined;
   return hit ? hit.a : cx.base + 0.3 + i * 0.25;
 };
 
