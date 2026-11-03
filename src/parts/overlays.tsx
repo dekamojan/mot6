@@ -6,20 +6,24 @@
 // img   = file di public/<video>/ (nama harus persis);  glyph = emoji/teks besar tanpa file.
 // x,y   = titik tengah di layar 1080x1920 (kosong = sudut atas area gambar, bergantian kanan/kiri);  s = skala (1 = 260px).
 // anim  = pop (membesar, bawaan) | drop (jatuh) | slide-left | slide-right | spin. Setelah muncul, objek melayang pelan.
+// dur   = lama objek terlihat (detik, bawaan 2,2) sebelum mengecil dan hilang, supaya banyak pops tidak menumpuk di layar.
 import React from "react";
 import { Img, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { Ctx, norm } from "./ui";
+import { Ctx, norm, clamp01 } from "./ui";
 import type { Cx, Pop } from "./types";
 
 // Detik (absolut) objek mulai muncul. Berbeda dari blok "stage", TIDAK dibatasi 0,45 dtk: ikut kata yang diucapkan.
 export const popTime = (p: Pop, cx: Cx, i: number): number => {
   if (typeof p.at === "number") return cx.base + Math.max(0, p.at);
   const k = p.word ? norm(p.word) : "";
-  const hit = k ? cx.ws.find((w) => norm(w.w).startsWith(k)) : undefined;
+  // hanya kata yang diucapkan di/ setelah awal adegan ini (bukan kemunculan yang sama di adegan sebelumnya)
+  const hit = k ? cx.ws.find((w) => w.a >= cx.base - 0.1 && norm(w.w).startsWith(k)) : undefined;
   return hit ? hit.a : cx.base + 0.3 + i * 0.25;
 };
 
 const SIZE = 260;
+const LIFE = 2.2; // detik terlihat (bawaan)
+const EXIT = 0.3; // detik animasi mengecil saat hilang
 const SLOTS_X = [830, 250]; // posisi bawaan: kanan lalu kiri
 
 export const PopLayer: React.FC<{ pops: Pop[]; defaultY: number }> = ({ pops, defaultY }) => {
@@ -32,6 +36,9 @@ export const PopLayer: React.FC<{ pops: Pop[]; defaultY: number }> = ({ pops, de
         if (!p || (!p.img && !p.glyph)) return null;
         const lf = frame - Math.round(popTime(p, cx, i) * fps);
         if (lf < 0) return null; // belum waktunya
+        const life = Math.max(0.8, p.dur ?? LIFE) * fps;
+        if (lf > life + EXIT * fps) return null; // sudah hilang
+        const out = clamp01((lf - life) / (EXIT * fps)); // 0 = tampil, 1 = hilang
         const sp = spring({ frame: lf, fps, config: { damping: 10, stiffness: 120 } });
         const inv = 1 - sp;
         const size = SIZE * (p.s ?? 1);
@@ -54,7 +61,8 @@ export const PopLayer: React.FC<{ pops: Pop[]; defaultY: number }> = ({ pops, de
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              transform: `translate(${dx}px, ${dy + bob}px) rotate(${rot}deg) scale(${sp})`,
+              transform: `translate(${dx}px, ${dy + bob}px) rotate(${rot}deg) scale(${sp * (1 - out)})`,
+              opacity: 1 - out,
               filter: "drop-shadow(0 12px 18px rgba(0,0,0,.35))",
             }}
           >
