@@ -61,7 +61,7 @@ export type Item = {
 };
 
 // Objek pelengkap yang muncul dengan gerakan saat kata tertentu (lihat parts/overlays.tsx)
-export type Pop = { word?: string; at?: number; img?: string; glyph?: string; x?: number; y?: number; s?: number; anim?: "pop" | "drop" | "slide-left" | "slide-right" | "spin" };
+export type Pop = { word?: string; at?: number; img?: string; glyph?: string; x?: number; y?: number; s?: number; dur?: number; anim?: "pop" | "drop" | "slide-left" | "slide-right" | "spin" };
 export type Scene = { title: string; start: number; small?: number; pose?: string; mascot?: "left" | "center" | "right"; stage?: Item[]; transition?: string; bg?: string; label?: string; prop?: string; step?: string; orb?: "big" | "small" | "hide"; pops?: Pop[] };
 
 export type Data = {
